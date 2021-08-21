@@ -56,6 +56,8 @@ CORS_ORIGIN_WHITELIST = [
      'https://arseniyduck.github.io/',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://arseniyduck.github.io/',]
+
 ROOT_URLCONF = 'my_app_backend.urls'
 
 TEMPLATES = [
