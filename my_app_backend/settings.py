@@ -53,7 +53,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000',
-     'https://arseniyduck.github.io/todo-app-large-build/',
+     'https://arseniyduck.github.io/',
 ]
 
 ROOT_URLCONF = 'my_app_backend.urls'
