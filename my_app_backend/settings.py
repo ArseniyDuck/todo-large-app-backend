@@ -1,5 +1,7 @@
 import cloudinary
 import cloudinary_storage
+import django_heroku
+import dj_database_url
 from decouple import config
 from pathlib import Path
 import os
@@ -46,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -133,6 +136,8 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 AUTH_USER_MODEL = 'task_app.User'
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
@@ -143,9 +148,6 @@ CORS_ALLOW_CREDENTIALS = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+django_heroku.settings(locals())
 
-# create .env file and use config('SECRET_KEY'), config('IS_DEBUG')
 # before deploying set CORS_ORIGIN_WHITELIST to ['https://arseniyduck.github.io/built-react-files/']
-# find out, should i add db.sqlite3 in repo
-# find out, should i add migration files in repo
-# install packege for media files, static files
