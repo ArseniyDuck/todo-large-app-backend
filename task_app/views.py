@@ -60,7 +60,7 @@ class CreateTaskGroup(APIView):
 
 
 class Login(View):
-   @method_decorator(csrf_protect)
+   @method_decorator(ensure_csrf_cookie)
    def post(self, request):
       form = AuthenticationForm(data=json_to_query_dict(request.body))
       if form.is_valid():
