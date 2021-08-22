@@ -57,7 +57,7 @@ CORS_ORIGIN_WHITELIST = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = ['todo-app-large.herokuapp.com',]
+CSRF_TRUSTED_ORIGINS = ['https://todo-app-large.herokuapp.com',]
 
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
