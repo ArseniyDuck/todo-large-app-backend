@@ -22,8 +22,8 @@ from .serializers import TaskValidator
 from .forms import TaskGroupForm, RegisterForm, UpdateGroupForm, UpdatePhotoForm, UpdateTaskNameForm
 
 
-@ensure_csrf_cookie
 class GetUsername(APIView):
+   @method_decorator(ensure_csrf_cookie)
    def get(self, request):
       if request.user.is_authenticated:
          serializer = UserSerializer(request.user)
