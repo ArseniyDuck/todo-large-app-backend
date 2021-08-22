@@ -53,10 +53,10 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000',
-     'https://arseniyduck.github.io/',
+     'https://todo-app-large.herokuapp.com/',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['arseniyduck.github.io',]
+CSRF_TRUSTED_ORIGINS = ['todo-app-large.herokuapp.com',]
 
 ROOT_URLCONF = 'my_app_backend.urls'
 
