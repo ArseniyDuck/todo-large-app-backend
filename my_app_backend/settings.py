@@ -53,8 +53,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000',
-     'https://todo-app-large.herokuapp.com/',
+     'localhost:3000',
+     'todo-app-large.herokuapp.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = ['todo-app-large.herokuapp.com',]
