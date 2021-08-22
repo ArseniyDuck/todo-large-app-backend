@@ -22,8 +22,21 @@ from .serializers import TaskValidator
 from .forms import TaskGroupForm, RegisterForm, UpdateGroupForm, UpdatePhotoForm, UpdateTaskNameForm
 
 
+@method_decorator(ensure_csrf_cookie, 'dispatch')
+@method_decorator(csrf_protect, 'dispatch')
+class Login(View):
+   def post(self, request):
+      form = AuthenticationForm(data=json_to_query_dict(request.body))
+      if form.is_valid():
+         login(request, form.get_user())
+         return HttpResponse(status=201)
+      else:
+         return HttpResponse(status=400)
+
+
+@method_decorator(ensure_csrf_cookie, 'dispatch')
+@method_decorator(csrf_protect, 'dispatch')
 class GetUsername(APIView):
-   @method_decorator(ensure_csrf_cookie)
    def get(self, request):
       if request.user.is_authenticated:
          serializer = UserSerializer(request.user)
@@ -59,15 +72,6 @@ class CreateTaskGroup(APIView):
       return HttpResponse(status=400)
 
 
-class Login(View):
-   @method_decorator(ensure_csrf_cookie)
-   def post(self, request):
-      form = AuthenticationForm(data=json_to_query_dict(request.body))
-      if form.is_valid():
-         login(request, form.get_user())
-         return HttpResponse(status=201)
-      else:
-         return HttpResponse(status=400)
 
 
 class Registration(View):
