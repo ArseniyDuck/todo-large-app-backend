@@ -6,9 +6,6 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from django.http import QueryDict
 
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import ensure_csrf_cookie
-
 from rest_framework.views import APIView
 from django.views.generic import View
 from rest_framework.decorators import api_view
@@ -23,7 +20,6 @@ from .forms import TaskGroupForm, RegisterForm, UpdateGroupForm, UpdatePhotoForm
 
 
 class GetUsername(APIView):
-   @method_decorator(ensure_csrf_cookie)
    def get(self, request):
       if request.user.is_authenticated:
          serializer = UserSerializer(request.user)
@@ -46,7 +42,6 @@ class GetMiniGroups(APIView):
 
 
 class CreateTaskGroup(APIView):
-   @method_decorator(ensure_csrf_cookie)
    def post(self, request):
       form = TaskGroupForm(data=request.data)
       if form.is_valid():
@@ -60,7 +55,6 @@ class CreateTaskGroup(APIView):
 
 
 class Login(View):
-   @method_decorator(ensure_csrf_cookie)
    def post(self, request):
       form = AuthenticationForm(data=json_to_query_dict(request.body))
       if form.is_valid():
@@ -71,7 +65,6 @@ class Login(View):
 
 
 class Registration(View):
-   @method_decorator(ensure_csrf_cookie)
    def post(self, request):
       form = RegisterForm(data=json_to_query_dict(request.body))
       if form.is_valid():
@@ -92,7 +85,6 @@ class Logout(View):
 
 
 class UpdatePhoto(APIView):
-   @method_decorator(ensure_csrf_cookie)
    def post(self, request):
       if request.user.is_authenticated:
          form = UpdatePhotoForm(request.POST, request.FILES)
@@ -110,7 +102,6 @@ class UpdateTask(APIView):
       serializer = TaskSerializer(task)
       return serializer.data
 
-   @method_decorator(ensure_csrf_cookie)
    def post(self, request):
       post_data = QueryDict(urlencode(request.data))
       hasName, hasDeadline, hasAction = post_data.__contains__('name'), post_data.__contains__('deadline'), post_data.__contains__('action')
@@ -142,7 +133,6 @@ class UpdateGroup(APIView):
       serializer = MiniGroupSerializer(task)
       return serializer.data
 
-   @method_decorator(ensure_csrf_cookie)
    def post(self, request):
       post_data = QueryDict(urlencode(request.data))
       hasName, hasAction = post_data.__contains__('name'), post_data.__contains__('action')
@@ -165,7 +155,6 @@ class UpdateGroup(APIView):
       return HttpResponse(status=400)
 
 
-@ensure_csrf_cookie
 @api_view(['POST'])
 def createTask(request):
    ser_data = TaskValidator(data=request.data)

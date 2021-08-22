@@ -53,13 +53,13 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-   'localhost:3000',
-   'todo-app-large.herokuapp.com',
+   'http://localhost:3000',
+   'https://todo-app-large.herokuapp.com',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['todo-app-large.herokuapp.com',]
+CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = ['todo-app-large.herokuapp.com',]
 
 ROOT_URLCONF = 'my_app_backend.urls'
 
@@ -146,8 +146,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
-
-CORS_ALLOW_CREDENTIALS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
