@@ -19,9 +19,6 @@ SECRET_KEY = config('SECRET_KEY', default="")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -31,12 +28,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage',
     'corsheaders',
     'rest_framework',
     'task_app',
-    'cloudinary',
-    'cloudinary_storage',
-
 ]
 
 MIDDLEWARE = [
@@ -51,6 +47,8 @@ MIDDLEWARE = [
    #  'django.middleware.csrf.CsrfViewMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'todo-app-large.herokuapp.com', ]
 
 CORS_ORIGIN_WHITELIST = [
    'http://localhost:3000',
