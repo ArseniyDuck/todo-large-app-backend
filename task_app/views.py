@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from django.http import QueryDict
 
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt, csrf_protect, ensure_csrf_cookie
 
 from rest_framework.views import APIView
 from django.views.generic import View
@@ -22,8 +22,7 @@ from .serializers import TaskValidator
 from .forms import TaskGroupForm, RegisterForm, UpdateGroupForm, UpdatePhotoForm, UpdateTaskNameForm
 
 
-@method_decorator(ensure_csrf_cookie, 'dispatch')
-@method_decorator(csrf_protect, 'dispatch')
+@method_decorator(csrf_exempt, 'dispatch')
 class Login(View):
    def post(self, request):
       form = AuthenticationForm(data=json_to_query_dict(request.body))
@@ -34,8 +33,6 @@ class Login(View):
          return HttpResponse(status=400)
 
 
-# @method_decorator(ensure_csrf_cookie, 'dispatch')
-# @method_decorator(csrf_protect, 'dispatch')
 class GetUsername(APIView):
    def get(self, request):
       if request.user.is_authenticated:
