@@ -22,7 +22,7 @@ from .serializers import TaskValidator
 from .forms import TaskGroupForm, RegisterForm, UpdateGroupForm, UpdatePhotoForm, UpdateTaskNameForm
 
 
-@method_decorator(csrf_exempt)
+@method_decorator(csrf_exempt, 'dispatch')
 class Login(View):
    def post(self, request):
       form = AuthenticationForm(data=json_to_query_dict(request.body))
@@ -55,7 +55,7 @@ class GetMiniGroups(APIView):
       return Response(serializer.data)
 
 
-@method_decorator(csrf_exempt)
+@method_decorator(csrf_exempt, 'dispatch')
 class CreateTaskGroup(APIView):
    def post(self, request):
       form = TaskGroupForm(data=request.data)
@@ -70,7 +70,7 @@ class CreateTaskGroup(APIView):
 
 
 
-@method_decorator(csrf_exempt)
+@method_decorator(csrf_exempt, 'dispatch')
 class Registration(View):
    def post(self, request):
       form = RegisterForm(data=json_to_query_dict(request.body))
@@ -90,7 +90,8 @@ class Logout(View):
          return HttpResponse(status=200)
       return HttpResponse(status=400)
 
-@method_decorator(csrf_exempt)
+
+@method_decorator(csrf_exempt, 'dispatch')
 class UpdatePhoto(APIView):
    def post(self, request):
       if request.user.is_authenticated:
@@ -104,7 +105,7 @@ class UpdatePhoto(APIView):
       return HttpResponse(status=400)
 
 
-@method_decorator(csrf_exempt)
+@method_decorator(csrf_exempt, 'dispatch')
 class UpdateTask(APIView):
    def serialize_task(self, task):
       serializer = TaskSerializer(task)
@@ -136,7 +137,7 @@ class UpdateTask(APIView):
       return HttpResponse(status=400)
 
 
-@method_decorator(csrf_exempt)
+@method_decorator(csrf_exempt, 'dispatch')
 class UpdateGroup(APIView):
    def serialize_task(self, task):
       serializer = MiniGroupSerializer(task)
