@@ -22,7 +22,7 @@ from .serializers import TaskValidator
 from .forms import TaskGroupForm, RegisterForm, UpdateGroupForm, UpdatePhotoForm, UpdateTaskNameForm
 
 
-@method_decorator(csrf_exempt, 'dispatch')
+@method_decorator(csrf_exempt)
 class Login(View):
    def post(self, request):
       form = AuthenticationForm(data=json_to_query_dict(request.body))
@@ -55,8 +55,8 @@ class GetMiniGroups(APIView):
       return Response(serializer.data)
 
 
+@method_decorator(csrf_exempt)
 class CreateTaskGroup(APIView):
-   @method_decorator(csrf_protect)
    def post(self, request):
       form = TaskGroupForm(data=request.data)
       if form.is_valid():
@@ -70,9 +70,8 @@ class CreateTaskGroup(APIView):
 
 
 
-
+@method_decorator(csrf_exempt)
 class Registration(View):
-   @method_decorator(csrf_protect)
    def post(self, request):
       form = RegisterForm(data=json_to_query_dict(request.body))
       if form.is_valid():
@@ -91,9 +90,8 @@ class Logout(View):
          return HttpResponse(status=200)
       return HttpResponse(status=400)
 
-
+@method_decorator(csrf_exempt)
 class UpdatePhoto(APIView):
-   @method_decorator(csrf_protect)
    def post(self, request):
       if request.user.is_authenticated:
          form = UpdatePhotoForm(request.POST, request.FILES)
@@ -106,12 +104,12 @@ class UpdatePhoto(APIView):
       return HttpResponse(status=400)
 
 
+@method_decorator(csrf_exempt)
 class UpdateTask(APIView):
    def serialize_task(self, task):
       serializer = TaskSerializer(task)
       return serializer.data
 
-   @method_decorator(csrf_protect)
    def post(self, request):
       post_data = QueryDict(urlencode(request.data))
       hasName, hasDeadline, hasAction = post_data.__contains__('name'), post_data.__contains__('deadline'), post_data.__contains__('action')
@@ -138,12 +136,12 @@ class UpdateTask(APIView):
       return HttpResponse(status=400)
 
 
+@method_decorator(csrf_exempt)
 class UpdateGroup(APIView):
    def serialize_task(self, task):
       serializer = MiniGroupSerializer(task)
       return serializer.data
 
-   @method_decorator(csrf_protect)
    def post(self, request):
       post_data = QueryDict(urlencode(request.data))
       hasName, hasAction = post_data.__contains__('name'), post_data.__contains__('action')
@@ -166,7 +164,7 @@ class UpdateGroup(APIView):
       return HttpResponse(status=400)
 
 
-@ensure_csrf_cookie
+@csrf_exempt
 @api_view(['POST'])
 def createTask(request):
    ser_data = TaskValidator(data=request.data)
