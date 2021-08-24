@@ -34,8 +34,8 @@ class Login(View):
          return HttpResponse(status=400)
 
 
-@method_decorator(ensure_csrf_cookie, 'dispatch')
-@method_decorator(csrf_protect, 'dispatch')
+# @method_decorator(ensure_csrf_cookie, 'dispatch')
+# @method_decorator(csrf_protect, 'dispatch')
 class GetUsername(APIView):
    def get(self, request):
       if request.user.is_authenticated:

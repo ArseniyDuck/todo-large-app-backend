@@ -158,5 +158,3 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
-
-# before deploying set CORS_ORIGIN_WHITELIST to ['https://arseniyduck.github.io/built-react-files/']
