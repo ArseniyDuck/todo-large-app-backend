@@ -45,7 +45,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'task_app.middleware.CsrfHeaderMiddleware',
 ]
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'todo-app-large.herokuapp.com', ]
@@ -59,12 +60,14 @@ CORS_ALLOWED_ORIGINS  = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = ['todo-app-large.herokuapp.com',]
+CSRF_TRUSTED_ORIGINS = ['todo-app-large.herokuapp.com']
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
+
+CORS_EXPOSE_HEADERS = ['X-CSRFTOKEN']
 
 ROOT_URLCONF = 'my_app_backend.urls'
 
