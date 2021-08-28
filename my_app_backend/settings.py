@@ -50,12 +50,12 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'todo-app-large.herokuapp.com', ]
 
-CORS_ORIGIN_WHITELIST = [
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ALLOWED_ORIGINS  = [
    'http://localhost:3000',
    'https://todo-app-large.herokuapp.com',
 ]
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_CREDENTIALS = True
 
